@@ -1,0 +1,142 @@
+:root {
+    --primary: #ff4d6d;
+    --bg-gradient: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 100%);
+}
+
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent; /* Прибирає синю рамку при кліку на iOS */
+}
+
+body {
+    margin: 0;
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background: var(--bg-gradient);
+    height: 100vh;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.screen {
+    position: absolute;
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    transition: opacity 0.8s ease;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;
+}
+
+/* Скляний ефект для карток */
+.glass-card {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 30px;
+    padding: 40px 20px;
+    box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+}
+
+h2 { color: #880e4f; font-size: 1.8rem; margin-bottom: 30px; }
+
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    height: 180px; /* Місце для маневрів кнопки Ні */
+}
+
+button {
+    width: 200px;
+    padding: 18px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+#yesBtn {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 10px 20px rgba(255, 77, 109, 0.4);
+}
+
+#noBtn {
+    background: #ffffff;
+    color: #880e4f;
+}
+
+/* Відео адаптація */
+.video-wrapper {
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+video { width: 100%; display: block; }
+
+/* Падаючі сердечка */
+.heart {
+    position: fixed;
+    top: -20px;
+    font-size: 24px;
+    z-index: -1;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to { transform: translateY(110vh) rotate(360deg); }
+}
+
+.fade-in-text {
+    font-size: 2rem;
+    color: #ff4d6d;
+    animation: fadeInOut 3s forwards;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: scale(0.95); filter: blur(10px); }
+    20% { opacity: 1; transform: scale(1); filter: blur(0); }
+    80% { opacity: 1; transform: scale(1); filter: blur(0); }
+    100% { opacity: 0; transform: scale(1.05); filter: blur(5px); }
+}
+
+/* Додатково: впевнимося, що основний контент з кнопками плавно з'являється */
+#main-content {
+    transition: opacity 1s ease-in-out;
+}
+
+#game-container {
+    flex-direction: column;
+    z-index: 5;
+}
+
+.game-info {
+    position: absolute;
+    top: env(safe-area-inset-top, 20px);
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4d6d;
+    background: rgba(255, 255, 255, 0.6);
+    padding: 10px 20px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+#gameCanvas {
+    display: block;
+    touch-action: none; /* Важливо для iOS, щоб екран не смикався при грі */
+}
